@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todoey/components/add_task_screen.dart';
 import 'package:todoey/components/tasks_list.dart';
+import 'package:todoey/model/todo_provider.dart';
 
 class TasksScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TodoProvider todoProvider = Provider.of<TodoProvider>(context);
     return Scaffold(
       floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.lightBlueAccent,
@@ -41,7 +44,7 @@ class TasksScreen extends StatelessWidget {
                           fontSize: 50.0,
                           fontWeight: FontWeight.w700)),
                   Text(
-                    "12 Tasks",
+                    "${todoProvider.tasks.length} Tasks",
                     style: TextStyle(color: Colors.white),
                   )
                 ],
