@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todoey/model/task.dart';
+import 'package:todoey/model/todo_provider.dart';
 
 class AddTaskScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    TodoProvider todoProvider = Provider.of<TodoProvider>(context);
+    TextEditingController textEditingController = TextEditingController();
     return Container(
       color: Color(0xff757575),
       child: Container(
@@ -28,6 +33,7 @@ class AddTaskScreen extends StatelessWidget {
             ),
             TextField(
               autofocus: true,
+              controller: textEditingController,
               textAlign: TextAlign.center,
             ),
             FlatButton(
@@ -36,7 +42,11 @@ class AddTaskScreen extends StatelessWidget {
                 style: TextStyle(color: Colors.white),
               ),
               color: Colors.lightBlueAccent,
-              onPressed: () {},
+              onPressed: () {
+                todoProvider.addTask(new Task(name: textEditingController.text));
+                textEditingController.text = "";
+                Navigator.pop(context);
+              },
             )
           ],
         ),
