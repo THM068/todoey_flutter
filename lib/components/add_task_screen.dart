@@ -43,8 +43,11 @@ class AddTaskScreen extends StatelessWidget {
               ),
               color: Colors.lightBlueAccent,
               onPressed: () {
-                todoProvider.addTask(new Task(name: textEditingController.text));
-                textEditingController.text = "";
+                String name = textEditingController.text;
+                if(name != null && name.isNotEmpty) {
+                  todoProvider.addTask(new Task(name: textEditingController.text));
+                  textEditingController.text = "";
+                }
                 Navigator.pop(context);
               },
             )
